@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "paths": {
+      "@layout/*": [
+        "layout/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@views/*": [
+        "views/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "jsconfig.extend.json"
+  ]
+}

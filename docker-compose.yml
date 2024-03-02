@@ -1,0 +1,105 @@
+version: '3.1'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 720798d5-aa5a-476e-a3a3-5e3392324052
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres_data:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - app-tier
+
+  redis:
+    image: 'bitnami/redis:latest'
+    restart: 'always'
+    container_name: 'redis'
+    environment:
+      - REDIS_PASSWORD=f753c618-141a-40ea-992e-1be0146541c5
+    networks:
+      - app-tier
+
+  file:
+    build:
+      context: .
+      dockerfile: ./file/Dockerfile
+    restart: 'always'
+    volumes:
+      - ./public/:/app/public/
+    ports:
+      - 8082:8082
+    environment:
+      - PORT=8082
+      - LIMIT=50mb
+    networks:
+      - app-tier
+
+  openiddict:
+    build:
+      context: ./api
+      dockerfile: ./src/OkVip.Gamble.AuthServer/Dockerfile
+    restart: 'always'
+    ports:
+      - 44344:44344
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_ENVIRONMENT=production
+    networks:
+      - app-tier
+
+  api:
+    build:
+      context: ./api
+      dockerfile: ./src/OkVip.Gamble.HttpApi.Host/Dockerfile
+    restart: 'always'
+    ports:
+      - 44383:44383
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=production
+    networks:
+      - app-tier
+
+  luckyspaceship:
+    build:
+      context: ./api
+      dockerfile: ./src/OkVip.Gamble.LuckySpaceship.Host/Dockerfile
+    restart: 'always'
+    ports:
+      - 44384:44384
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=production
+    networks:
+      - app-tier
+
+  ui:
+    build:
+      context: .
+      dockerfile: ./ui/Dockerfile
+    restart: 'always'
+    ports:
+      - 21021:80
+
+  admin:
+    build:
+      context: .
+      dockerfile: ./admin/Dockerfile
+    restart: 'always'
+    ports:
+      - 21022:80

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>OkVip.Gamble</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OkVip.Gamble.Domain\OkVip.Gamble.Domain.csproj" />
+    <ProjectReference Include="..\OkVip.Gamble.Application.Contracts\OkVip.Gamble.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="2.14.1" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="8.0.2" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.0.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.0.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.0.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.0.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.0.2" />
+	<PackageReference Include="Volo.Abp.Http.Client" Version="8.0.2" />
+	<PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="8.0.2" />
+  </ItemGroup>
+
+</Project>

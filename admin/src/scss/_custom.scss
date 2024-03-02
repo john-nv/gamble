@@ -1,0 +1,31 @@
+// Here you can add other styles
+
+.Wswk0n46Kg {
+
+  .btn.btn-danger,
+  .btn.btn-success {
+    color: #fff !important;
+  }
+
+  .ReactTable .rt-thead.-header {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .ReactTable .rt-thead .rt-th,
+  .ReactTable .rt-thead .rt-td {
+    box-shadow: none !important;
+  }
+
+  .ReactTable .rt-tr {
+    align-items: center;
+  }
+
+  .game-editor {
+
+
+    >div {
+      display: flex;
+      flex: 1 1 auto;
+    }
+  }
+}
